@@ -60,7 +60,7 @@ def creation_donnees ():
     # Variables qui seront utilisées dans cette fonction
     
     Global = []
-    data=lire_donnee(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/information_utilisateur_double.csv")   #fichier texte avec les informations de l'utilisateur
+    data=lire_donnee(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/TIPE_2324/information_utilisateur_double.csv")   #fichier texte avec les informations de l'utilisateur
     date_arrivee = transformation_date(data[0][1])
     date_retour = transformation_date(data[0][0])
     
@@ -82,9 +82,9 @@ def creation_donnees ():
                         # On doit ajouter une condition en fonction de si le chemin d'accès au fichier comporte une sous catégorie ou non
                         
                         if (data[3][k]=="None" and j == k):
-                            dates_rencontres = np.loadtxt(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/Base de données TIPE/"+data[1][i]+"/"+data[2][j]+"/TIPE_"+data[1][i]+"_"+data[2][j]+".csv", dtype= str, delimiter=";", skiprows=11, usecols=1, ndmin = 1, encoding="utf8")   #va chercher dans le bon fichier
+                            dates_rencontres = np.loadtxt(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/TIPE_2324/Base de données TIPE/"+data[1][i]+"/"+data[2][j]+"/TIPE_"+data[1][i]+"_"+data[2][j]+".csv", dtype= str, delimiter=";", skiprows=11, usecols=1, ndmin = 1, encoding="utf8")   #va chercher dans le bon fichier
                         else:
-                            dates_rencontres = np.loadtxt(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/Base de données TIPE/"+data[1][i]+"/"+data[2][j]+"/"+data[3][k]+"/TIPE_"+data[1][i]+"_"+data[2][j]+"_"+data[3][k]+".csv", dtype= str, delimiter=";", skiprows=11, usecols=1, ndmin = 1, encoding="utf8")   #va chercher dans le bon fichier    
+                            dates_rencontres = np.loadtxt(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/TIPE_2324/Base de données TIPE/"+data[1][i]+"/"+data[2][j]+"/"+data[3][k]+"/TIPE_"+data[1][i]+"_"+data[2][j]+"_"+data[3][k]+".csv", dtype= str, delimiter=";", skiprows=11, usecols=1, ndmin = 1, encoding="utf8")   #va chercher dans le bon fichier    
                         
                         # Ce tableau contient toutes les dates auxquels il y a des matchs pour le sport sélectionné
                         
@@ -96,16 +96,16 @@ def creation_donnees ():
                         # De même nous devons considérer le cas où le sport en question ne prévois pas de sous catéogrie
 
                         if (data[3][k]=="None" and j==k):
-                            gen = generate_specific_rows(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/Base de données TIPE/"+data[1][i]+"/"+data[2][j]+"/TIPE_"+data[1][i]+"_"+data[2][j]+".csv", userows=tab_indices)
+                            gen = generate_specific_rows(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/TIPE_2324/Base de données TIPE/"+data[1][i]+"/"+data[2][j]+"/TIPE_"+data[1][i]+"_"+data[2][j]+".csv", userows=tab_indices)
                             infos_matchs.append(transposee(np.loadtxt(gen, dtype = str, delimiter=";", usecols=(0,1,2,3,4), ndmin = 2, unpack='true', encoding="utf8")))   #va chercher dans le bon fichier   
                             infos_matchs = np.concatenate(infos_matchs)
                         else :
-                            gen = generate_specific_rows(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/Base de données TIPE/"+data[1][i]+"/"+data[2][j]+"/"+data[3][k]+"/TIPE_"+data[1][i]+"_"+data[2][j]+"_"+data[3][k]+".csv", userows=tab_indices)
+                            gen = generate_specific_rows(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/TIPE_2324/Base de données TIPE/"+data[1][i]+"/"+data[2][j]+"/"+data[3][k]+"/TIPE_"+data[1][i]+"_"+data[2][j]+"_"+data[3][k]+".csv", userows=tab_indices)
                             infos_matchs.append(transposee(np.loadtxt(gen, dtype = str, delimiter=";", usecols=(0,1,2,3,4), ndmin = 2, unpack='true', encoding="utf8")))  #va chercher dans le bon fichier 
                             infos_matchs = np.concatenate(infos_matchs)
                          
                         # Grâce aux indices, nous avons pu récupérer toutes les données des maths qui pourront être séléctionnés
-                        # Ne pas oublier de transposer la matrice
+                        # Ne pas oublier de transposer la matrice !
                     
                         if len(infos_matchs) > 0:
                             infos_matchs = np.concatenate(infos_matchs)
