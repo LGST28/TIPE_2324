@@ -1,0 +1,27 @@
+header{
+	text-align:center;
+	font-weight:bold;
+	font-size:100px;
+}
+
+p{
+	text-align:center;
+}
+
+body{	
+	background-image:url(logo.png),url(mascotte.png);
+	background-attachment:fixed , fixed;
+	background-repeat:no-repeat, no-repeat;
+	background-position:center center , bottom right;
+}
+
+
+
+input{
+	font-size : 20px;
+	width : 200px;
+	height : 30px;
+	margin-top : 20%;
+	margin-left : 42.5%;
+	text-align: center;
+}

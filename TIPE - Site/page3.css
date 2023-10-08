@@ -1,0 +1,61 @@
+header{
+	text-align:center;
+	font-weight:bold;
+	font-size:100px;
+}
+
+p{
+	text-align:center;
+}
+
+body{	
+	background-image:url(logo.png),url(mascotte.png);
+	background-attachment:fixed , fixed;
+	background-repeat:no-repeat, no-repeat;
+	background-position:center center , bottom right;
+}
+
+div{
+	text-align:center;
+
+}
+
+#enregistrer{
+	font-size : 20px;
+	width : 200px;
+	height : 30px;
+	margin-top : 5%;
+	margin-left : 10%;
+	text-align: center;
+}
+
+#masculin{
+	font-size : 30px;
+	width : 200px;
+	height : 30px;
+	margin-top : -40%;
+	margin-left : 41%;
+	text-align: center;
+}
+
+#feminin{
+	font-size : 30px;
+	width : 200px;
+	height : 30px;
+	margin-top : 5%;
+	margin-left : 15%;
+	text-align: center;
+}
+
+#mixte{
+	font-size : 30px;
+	width : 200px;
+	height : 30px;
+	margin-top : 5%;
+	margin-left : 38%;
+	text-align: center;
+}
+
+label{
+	font-size: 30px;
+}

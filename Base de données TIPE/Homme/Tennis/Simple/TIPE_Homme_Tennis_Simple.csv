@@ -1,0 +1,18 @@
+﻿Homme_Tennis_Simple;;;;
+;;;;
+Colonnes : ;;;;
+1: Type;;;;
+2: Date;;;;
+3: Heure de début;;;;
+4: Heure de fin ;;;;
+5: Localisation;;;;
+6: Nationalités / Équipes;;;;
+;;;;
+######;;;;
+Nadal;27/07/24;07:00;10:00;Brest
+Federer;29/07/24;10:30;15:00;Naval
+Michel;30/07/24;12:00;16:00;Arquachon
+Jacques;31/07/24;07:00;10:00;Lille
+Louis;01/08/24;10:30;15:00;Lyon
+R2D2;02/08/24;12:00;16:00;Marseille
+C3PO;04/08/24;19:30;23:00;Villeneuve
