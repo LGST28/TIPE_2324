@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 import copy
+from Fonctions_de_création import lire_donnee
 
 ###################################
 # Structure des données utilisées #
@@ -24,42 +25,36 @@ modele=[[[],[],[],[],[]]]   #| Indice 0 : Nom du sport
                             #| Indice 8 : Poids
                             #| Indice 9 : Type de rencontre (Si nécessaire)
 
-##################################################
-# Nouvelles fonctions en rapport avec les points #
-##################################################
+################################
+# Informations sur les indices #
+################################
 
+indice_points = 5
+indice_date_rencontre = 1
 
+##############################
+# Informations sur les dates #
+##############################
 
+# Faire attention, pour l'instant les dates sont inversées, avec le retour en premier (indice 0)
 
-#########################################
-# Fonctions de tranformation de l'heure #
-#########################################
+dates_larges = [0, 0] # Ici il suffit d'initialiser la liste à 0 car les dates seront ajoutées automatiquement
+jours_ajouts = 2
 
-# Fonction permettant d'associer une valeur exploitable à notre date (Non utilisée finalement)
+###############################
+# Informations sur les points #
+###############################
 
-def transformation_date(tableau_entree):
-    for i in range(len(tableau_entree)):
-        for j in range(len(tableau_entree[i])):
-            date = tableau_entree[i][j][1]
-            format_date = "%d/%m/%y"
-            tableau_entree[i][j][1] = datetime.strptime(date, format_date).date()
-    return tableau_entree
+points_dates_strictes = 1
+points_dates_larges = 0
 
-# Fonction permettant d'associer une valeur exploitable à nos heures de début et fin (Non utilisée finalement)
+############################
+# Informations utilisateur #
+############################
 
-def transformation_heure(tableau_entree):
-    for i in range(len(tableau_entree)):
-        for j in range(len(tableau_entree[i])):
-            heure_debut = tableau_entree[i][j][2]
-            heure_fin = tableau_entree[i][j][3]
-            format_heure = "%H:%M"
-            tableau_entree[i][j][2] = datetime.strptime(heure_debut, format_heure).time()
-            tableau_entree[i][j][3] = datetime.strptime(heure_fin, format_heure).time()
-    return tableau_entree
-
-# Fonction permettant de changer la date en donnée exploitable afin de comparer le fichier utilisateur avec les dates des sports (Utile dans l'extraction de la base de donnée)
-
-
+dates_utilisateur = lire_donnee(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/TIPE_2324/information_utilisateur_double.csv")[0]
+# Faire attention, pour l'instant les dates sont inversées, avec le retour en premier (indice 0)
+ 
 
 ################################
 # Poste de contrôle du contenu #
@@ -129,7 +124,7 @@ def imprimante():
     print()
     print()
 
-imprimante()
+"""imprimante()"""
                         
             
 #############################################

@@ -4,7 +4,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime as dt
-import copy
+"""import copy"""
+from Fonctions_utiles import transformation_date_locale, transposee
 
 ################################
 # Lecture de la base de donnée #
@@ -51,6 +52,20 @@ def lire_donnee(fichier):
 # Fonction qui permet de placer en tableau, les différents sports, ainsi que leurs horaires et le type de ces derniers
 
 
+#########################################
+# Fonction auxiliaire - Gestion tableur #
+#########################################
+
+# Cette fonction va permettre de récupérer uniquement certaines lignes de notre base de donnée, fonctionnalité non native à la fonction loadtxt
+
+def generate_specific_rows(filePath, userows=[]):
+    with open(filePath) as f:
+        for i, line in enumerate(f):
+            if i in userows:
+                yield line
+                
+
+
 ########################################
 # Creation de la matrice de rencontres #
 ########################################
@@ -61,8 +76,8 @@ def creation_donnees ():
     
     Global = []
     data=lire_donnee(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/TIPE_2324/information_utilisateur_double.csv")   #fichier texte avec les informations de l'utilisateur
-    date_arrivee = transformation_date(data[0][1])
-    date_retour = transformation_date(data[0][0])
+    date_arrivee = transformation_date_locale(data[0][1])
+    date_retour = transformation_date_locale(data[0][0])
     
     # Si la catégorie sous sport n'est pas prévue pour le sport concerné, alors on remplace par vide et on changera le chemin d'accès (Sécurité à faire)
     
@@ -89,7 +104,7 @@ def creation_donnees ():
                         # Ce tableau contient toutes les dates auxquels il y a des matchs pour le sport sélectionné
                         
                         for l in range (len(dates_rencontres)) :
-                            if date_arrivee <= transformation_date(dates_rencontres[l]) <= date_retour :       # Vérifie si la date de la recontre est incluse dans la période de visite de l'utilisateur
+                            if date_arrivee <= transformation_date_locale(dates_rencontres[l]) <= date_retour :       # Vérifie si la date de la recontre est incluse dans la période de visite de l'utilisateur
                                 tab_indices.append(l+11)
                         
                         # Désormais nous avons les indices de tous les matchs auxquel notre utilisateur peut assister    
@@ -120,88 +135,11 @@ def creation_donnees ():
 
 
 
-#############################################
-# Fonction auxiliaire - Gestion des données #
-#############################################
-
-def transformation_date(data): 
-    format_date = "%d/%m/%y"
-    date = dt.strptime(data, format_date).date()
-    return date
-
-#########################################
-# Fonction auxiliaire - Gestion tableur #
-#########################################
-
-# Cette fonction va permettre de récupérer uniquement certaines lignes de notre base de donnée, fonctionnalité non native à la fonction loadtxt
-
-def generate_specific_rows(filePath, userows=[]):
-    with open(filePath) as f:
-        for i, line in enumerate(f):
-            if i in userows:
-                yield line
-                
-#############################################
-# Fonction auxiliaire tranformation tableau #
-#############################################
-
-# Cette fonction va permettre de transformer l'écriture d'un tableau afin que l'exploitation de ses données soit plus facile par la suite (C'est juste la transposée d'une matrice n*n globalement)
-
-def transposee(tab):
-    return np.transpose(tab)
-
 ###################################
 # Attribution des points initiaux #
 ###################################
 
-# Cette fonction permet d'ajouter des cases à nos rencontres
-
-def add_info(l):
-
-    for i in range(0,len(l)):
-        for j in range(0, len(l[i])):
-            l[i][j].append("")
-    return l
 
 # Maintenant que nous avons une ou plusieurs cases en plus, nous allons pouvoir attribuer les points initiaux à chacune de nos rencontres
 
-indice_points = 5
-
-def n_p_attribution_simple(seq,n, indice):
-    seq[indice] = n
-    return seq
-
-
-def n_p_attribution_globale(liste, n):
-    for i in range(len(liste)):
-        for j in range(len(liste[i])):
-            liste[i][j][indice_points]= n
-    return liste
-
-
-
-
-
-
-###############################################
-# Poste de contrôle de la création du contenu #
-###############################################
-
-tableau_rencontres = creation_donnees()
-
-for tab in tableau_rencontres:
-    for sous_tab in tab:
-        print(sous_tab)
-
-# print(tableau_rencontres)
-print("")
-
-n_tab_1 = add_info(tableau_rencontres)
-n_tab_2 = n_p_attribution_globale(n_tab_1, 7) 
-
-# Désormais n_tab_2 est composé des rencontres avec ajouté à la fin un numéro qui correspond au nombre de points prédéterminés"""
-
-"""for tab in n_tab_2:
-    for sous_tab in tab:
-        print(sous_tab)"""
 

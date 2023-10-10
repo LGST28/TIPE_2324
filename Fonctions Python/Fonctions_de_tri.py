@@ -94,6 +94,6 @@ def tri_tableau(t,indice):
     print(t)
 
 
-t=[[["volley"],[3]],[["hand"],[1]],[["basket"],[5]]]
+"""t=[[["volley"],[3]],[["hand"],[1]],[["basket"],[5]]]"""
 
 #tri_tableau(t,1)
