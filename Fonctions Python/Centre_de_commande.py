@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 import copy
-from Fonctions_de_création import lire_donnee
+from Fonctions_de_création import *
 
 ###################################
 # Structure des données utilisées #
@@ -29,8 +29,8 @@ modele=[[[],[],[],[],[]]]   #| Indice 0 : Nom du sport
 # Informations sur les indices #
 ################################
 
-indice_points = 5
 indice_date_rencontre = 1
+indice_points = 5
 
 ##############################
 # Informations sur les dates #
@@ -39,7 +39,7 @@ indice_date_rencontre = 1
 # Faire attention, pour l'instant les dates sont inversées, avec le retour en premier (indice 0)
 
 dates_larges = [0, 0] # Ici il suffit d'initialiser la liste à 0 car les dates seront ajoutées automatiquement
-jours_ajouts = 2
+jours_ajouts = 1
 
 ###############################
 # Informations sur les points #
@@ -66,6 +66,21 @@ print()
 base_de_donnee = 1
 
 tableau_final = 1
+
+
+##############################################
+# Poste de commande de l'appel des fonctions #
+##############################################
+
+# On créé notre tableau avec tous les sports auxquels l'utilisateur peut assister 
+
+l_sports = creation_donnees()
+
+print(l_sports)
+
+
+
+
 
 
 

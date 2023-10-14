@@ -55,10 +55,10 @@ def n_p_attribution_simple(seq,n, indice):
     return seq
 
 
-def n_p_attribution_globale(liste, n):
+def n_p_ajout_point_globale(liste, n):
     for i in range(len(liste)):
         for j in range(len(liste[i])):
-            liste[i][j][indice_points]= n
+            liste[i][j][indice_points] += n
     return liste
                 
 

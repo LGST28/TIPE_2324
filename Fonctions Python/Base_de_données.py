@@ -1,5 +1,3 @@
-
-
 ######################################
 # Regroupement sports par catégories #
 ######################################
@@ -22,29 +20,9 @@ Balle = ("Basketball","basketball","Football","football","Golf","golf","Handball
 
 
 
-
-
-
-####################################
-# Fonction d'attribution de points #
-####################################
-
-def attribuer_points(tab,x):
-    y=tab[2][0]
-    tab[2]=x+y
-    return tab
-
-
-t=[[["volley"],["finale"],[6]],[["hand"],["quart de finale"],[1]],[["basket"],["huitieme"],[5]]]
-
-
-attribuer_points(t[0],2)
-print(t)
-
-
-##################################################
-#base de donnée pour les sports préférés par pays#
-##################################################
+####################################################
+# Base de donnée pour les sports préférés par pays #
+####################################################
 
 athletisme =["Antilles néerlandaises","Algérie","Bahamas","Belgique","Bahrein","Iles Caimans","Cameroun","Costa Rica","Cuba","République dominicaine","Equateur","Erythrée","Estonie","Ethiopie","Finlande","France","Royaume-Uni","Grèce","Jamaique","Kenya","Lettonie","Maroc","Nigéria","Nouvelle-Zélande","Panama","Pologne","Portugal","Qatar","Afrique du Sud","Russie","Somalie","Suède","Tanzanie","Trinité-et-Tobago","Tunisie","Ukraine"]
 aviron=["Canada","Danemark","Royaume-Uni","Pologne"]
