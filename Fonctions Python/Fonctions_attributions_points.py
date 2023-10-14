@@ -2,10 +2,12 @@
 # Attribution des points en fonction de la date #
 #################################################
 
-from Fonctions_de_création import lire_donnee, transformation_date_locale, creation_donnees
+from Fonctions_de_création import transformation_date_locale
 from datetime import datetime, timedelta
 from Fonctions_utiles import transfo_dates_directe, add_info
-from Centre_de_commande import indice_points, indice_date_rencontre, points_dates_larges, points_dates_strictes, dates_utilisateur, dates_larges, jours_ajouts
+from Centre_de_commande import indice_points, indice_date_rencontre, points_dates_larges, points_dates_strictes, dates_utilisateur, dates_larges, jours_ajouts, points_nationalité, points_finale, points_demi, points_quart
+
+
 
 # On transfome les dates utilisateur (entrée) en données exploitables
 
@@ -56,10 +58,11 @@ def n_p_attribution_simple(seq,n, indice):
 
 
 def n_p_ajout_point_globale(liste, n):
+    l_rep = liste
     for i in range(len(liste)):
         for j in range(len(liste[i])):
-            liste[i][j][indice_points] += n
-    return liste
+            l_rep[i][j][indice_points] = n
+    return l_rep
                 
 
 
@@ -69,11 +72,11 @@ def n_p_ajout_point_globale(liste, n):
 
 def pts_pour_type(t):
     if(t[1][0]=='finale'):
-        attribuer_points(t,5)
+        attribuer_points(t,points_finale)
     if(t[1][0]=='demi finale'):
-        attribuer_points(t,3)
+        attribuer_points(t,points_demi)
     if(t[1][0]=='quart de finale'):
-        attribuer_points(t,2)
+        attribuer_points(t,points_quart)
     return t
 
 
@@ -93,7 +96,7 @@ from Fonctions_utiles import is_in
 def pts_pour_nationalité (nationalité,t):
     sport=sports[t[0][0]]
     if is_in(nationalité,sport) :
-        attribuer_points(t,5)
+        attribuer_points(t,points_nationalité)
     return t
 
 

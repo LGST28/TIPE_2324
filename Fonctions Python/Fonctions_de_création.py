@@ -4,7 +4,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime as dt
-"""import copy"""
+import copy
 from Fonctions_utiles import transformation_date_locale, transposee
 
 ################################

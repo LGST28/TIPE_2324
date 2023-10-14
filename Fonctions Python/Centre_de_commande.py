@@ -6,7 +6,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 import copy
-from Fonctions_de_création import *
+from Fonctions_de_création import creation_donnees, lire_donnee
+#from Fonctions_attributions_points import 
+from Fonctions_utiles import add_info
+from Base_de_données import *
+
+##################################
+# Import de fonctions provisoire #
+##################################
+
+def n_p_ajout_point_globale(liste, n):
+    l_rep = liste
+    for i in range(len(liste)):
+        for j in range(len(liste[i])):
+            l_rep[i][j][indice_points] = n
+    return l_rep
+
 
 ###################################
 # Structure des données utilisées #
@@ -47,6 +62,10 @@ jours_ajouts = 1
 
 points_dates_strictes = 1
 points_dates_larges = 0
+points_nationalité = 5
+points_finale = 5
+points_demi = 3
+points_quart = 1 
 
 ############################
 # Informations utilisateur #
@@ -59,15 +78,19 @@ dates_utilisateur = lire_donnee(r"/Users/lg/Library/CloudStorage/OneDrive-Person
 ################################
 # Poste de contrôle du contenu #
 ################################
-print()
-print()
+
 
 
 base_de_donnee = 1
 
 tableau_final = 1
 
-
+def n_p_ajout_point_globale(liste, n):
+    for i in range(len(liste)):
+        for j in range(len(liste[i])):
+            liste[i][j][indice_points] = n
+    return liste
+                
 ##############################################
 # Poste de commande de l'appel des fonctions #
 ##############################################
@@ -75,8 +98,47 @@ tableau_final = 1
 # On créé notre tableau avec tous les sports auxquels l'utilisateur peut assister 
 
 l_sports = creation_donnees()
-
+print()
+print()
 print(l_sports)
+print()
+print()
+l_sports_av_points = add_info(l_sports)
+print(l_sports_av_points)
+print()
+print()
+
+# Désormais nous avons tous nos points présents et égaux à 0.  
+
+#print(l_sport_av_points)
+
+l_sports_av_points_0 = n_p_ajout_point_globale(l_sports_av_points,0)
+print(l_sports_av_points_0)
+print()
+print()
+
+# On créé un tableau qui va contenir chacune de nos simulations
+# Les simulations 1 représentent l'application des fonctions date -> points -> dates
+
+simu_tab_1 = []
+
+# Les simulations 2 représentent l'application des fonctions points -> dates
+
+# On fait des boucles qui font varier les paramètres des points, et pour chaque boucle on va récupérer le tableau de sortie, et donc le tableau proposé
+'''
+for i in range (1,5):
+    for j in range (3,8):
+        for k in range (1,5):
+            for l in range (1,5):
+                points_nationalité = i
+                points_finale = j
+                points_demi = j - 1
+                points_quart = j - 3 
+
+
+
+'''
+        
 
 
 

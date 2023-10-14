@@ -69,11 +69,11 @@ def transposee(tab):
 # Cette fonction permet d'ajouter des cases à nos rencontres
 
 def add_info(l):
-
+    rep = l
     for i in range(0,len(l)):
         for j in range(0, len(l[i])):
-            l[i][j].append("")
-    return l
+            rep[i][j].append("")
+    return rep
 
 ##########################
 # Fonction test présence #
