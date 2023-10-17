@@ -91,7 +91,7 @@ def tri_tableau(t,indice):
             t[j]=t[j+1]
             t[j+1]=tmp
             j=j-1
-    print(t)
+    return t
 
 
 """t=[[["volley"],[3]],[["hand"],[1]],[["basket"],[5]]]

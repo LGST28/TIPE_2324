@@ -47,10 +47,12 @@ def add_points_date_global(liste):
 # Attribution de points #
 #########################
 
-def attribuer_points(t,x):
-    y=t[2][0]
-    t[2]=[x+y]
-    return t
+def attribuer_points(tab,val):
+    
+    y=tab[indice_points]
+    tab[indice_points]=val+y
+    return tab
+
 
 def n_p_attribution_simple(seq,n, indice):
     seq[indice] = n
@@ -71,13 +73,14 @@ def n_p_ajout_point_globale(liste, n):
 ############
 
 def pts_pour_type(t):
-    if(t[1][0]=='finale'):
+    if(t[0]=="Finale"):
         attribuer_points(t,points_finale)
-    if(t[1][0]=='demi finale'):
+    if(t[0]=='Demi finale'):
         attribuer_points(t,points_demi)
-    if(t[1][0]=='quart de finale'):
+    if(t[0]=='Quart de finale'):
         attribuer_points(t,points_quart)
     return t
+
 
 
 """print(pts_pour_type(t[0]))

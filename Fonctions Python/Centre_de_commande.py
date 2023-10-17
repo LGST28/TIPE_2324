@@ -7,14 +7,20 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import copy
 from Fonctions_de_création import creation_donnees, lire_donnee
-#from Fonctions_attributions_points import 
-from Fonctions_utiles import add_info
+from Fonctions_attributions_points import n_p_ajout_point_globale # Cet appel à la fonction cause l'erreur
+from Fonctions_utiles import add_info, is_in
 from Base_de_données import *
+from Fonctions_de_tri import *
+
+
+dossier_racine = r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/TIPE_2324/"
 
 ##################################
 # Import de fonctions provisoire #
 ##################################
 
+# Voici ici les fonctions qui sont dans d'autres fichiers mais qu'on ne peux pas appeler
+'''
 def n_p_ajout_point_globale(liste, n):
     l_rep = liste
     for i in range(len(liste)):
@@ -22,6 +28,36 @@ def n_p_ajout_point_globale(liste, n):
             l_rep[i][j][indice_points] = n
     return l_rep
 
+
+def attribuer_points(tab,val):
+    
+    y=tab[indice_points]
+    tab[indice_points]=val+y
+    return tab
+
+
+print()
+print()
+print()
+
+
+
+def pts_pour_type(t):
+    if(t[0]=="Finale"):
+        attribuer_points(t,points_finale)
+    if(t[0]=='Demi finale'):
+        attribuer_points(t,points_demi)
+    if(t[0]=='Quart de finale'):
+        attribuer_points(t,points_quart)
+    return t
+
+def pts_pour_nationalité (nationalité,t):
+    sport=sports[t[0][0]]
+    if is_in(nationalité,sport) :
+        attribuer_points(t,points_nationalité)
+    return t
+
+'''
 
 ###################################
 # Structure des données utilisées #
@@ -71,7 +107,7 @@ points_quart = 1
 # Informations utilisateur #
 ############################
 
-dates_utilisateur = lire_donnee(r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé/TIPE/TIPE_2324/information_utilisateur_double.csv")[0]
+dates_utilisateur = lire_donnee(dossier_racine+r"/information_utilisateur_double.csv")[0]
 # Faire attention, pour l'instant les dates sont inversées, avec le retour en premier (indice 0)
  
 
@@ -79,18 +115,10 @@ dates_utilisateur = lire_donnee(r"/Users/lg/Library/CloudStorage/OneDrive-Person
 # Poste de contrôle du contenu #
 ################################
 
-
-
 base_de_donnee = 1
 
 tableau_final = 1
 
-def n_p_ajout_point_globale(liste, n):
-    for i in range(len(liste)):
-        for j in range(len(liste[i])):
-            liste[i][j][indice_points] = n
-    return liste
-                
 ##############################################
 # Poste de commande de l'appel des fonctions #
 ##############################################
@@ -98,24 +126,75 @@ def n_p_ajout_point_globale(liste, n):
 # On créé notre tableau avec tous les sports auxquels l'utilisateur peut assister 
 
 l_sports = creation_donnees()
-print()
-print()
-print(l_sports)
-print()
-print()
 l_sports_av_points = add_info(l_sports)
-print(l_sports_av_points)
+l_sports_av_points_0 = n_p_ajout_point_globale(l_sports_av_points,0) # On applique la fonction qui se trouve dans un autre fichier
+
+#for sport in l_sports_av_points_0:
+#   print(sport)
+
+print()
 print()
 print()
 
-# Désormais nous avons tous nos points présents et égaux à 0.  
+tab_points_type_1 = []
 
-#print(l_sport_av_points)
 
-l_sports_av_points_0 = n_p_ajout_point_globale(l_sports_av_points,0)
-print(l_sports_av_points_0)
+
+
+
+
+
+
+
+######################
+# Zone de recherches #
+######################
+
+
+
+
+
+
+
+
+# On commence par attribuer les points en fonction du type de rencontre
+'''
+def fct_points_type_rencontres(tab):
+    rep = []
+    for i in range (len(tab)): # Ici nous avons chaque sport et on travaille sur les rencontres
+        for j in range (len(tab[i])):
+            rep.append(pts_pour_type(tab[i][j]))
+    return rep
+
+def fct_points_nationalite(tab):
+    rep = []
+    for i in range (len(tab)): # Ici nous avons chaque sport et on travaille sur les rencontres
+        for j in range (len(tab[i])):
+            rep.append(pts_pour_nationalité("France",tab[i][j]))
+    return rep
+
+
+test = fct_points_type_rencontres(l_sports_av_points_0)
+
+print(test)
+
+test_2 = fct_points_nationalite(test)
+'''
 print()
 print()
+print()
+
+#print(test_2)
+
+
+print()
+print()
+print()
+
+#print(tab_points_type_1)
+
+'''
+# Désormais nous avons accès à un tableau sur lequel nous pouvons travailler les points
 
 # On créé un tableau qui va contenir chacune de nos simulations
 # Les simulations 1 représentent l'application des fonctions date -> points -> dates
@@ -124,21 +203,42 @@ simu_tab_1 = []
 
 # Les simulations 2 représentent l'application des fonctions points -> dates
 
+simu_tab_2 = []
+
 # On fait des boucles qui font varier les paramètres des points, et pour chaque boucle on va récupérer le tableau de sortie, et donc le tableau proposé
-'''
+
+def tri_simu_1(liste) :
+
+    rep = ejection_globale_n(liste)
+    rep = tri_tableau(rep)
+    rep = ejection_globale_n(rep)
+
+    return rep
+
+def tri_simu_2(liste) :
+
+    rep = tri_tableau(liste)
+    rep = ejection_globale_n(rep)
+
+    return rep
+
+
 for i in range (1,5):
     for j in range (3,8):
-        for k in range (1,5):
-            for l in range (1,5):
+            for l in range (len(l_sports_av_points_0)):
                 points_nationalité = i
                 points_finale = j
                 points_demi = j - 1
                 points_quart = j - 3 
 
+                # On traite le premier cas, càd que l'on trie dans un premier temps les rencontres en fonction des dates, avant de trier les points
+                # On commence à attribuer les points pour le type de rencontre
 
+                for a in range (len(l_sports_av_points_0[l])): # Ici nous avons chaque sport et on travaille sur les rencontres
+                    tab_points_type_1 = pts_pour_type(l_sports_av_points_0[l][a])'''
 
 '''
-        
+
 
 
 
@@ -231,5 +331,5 @@ def imprimante():
 # Fonctions obsolètes #
 #######################
 
-
+'''
 

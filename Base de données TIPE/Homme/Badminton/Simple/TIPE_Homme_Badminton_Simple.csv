@@ -1,32 +1,1 @@
-﻿Homme_Badminton_Simple;;;;
-;;;;
-Colonnes :;;;;
-1: Type;;;;
-2: Date;;;;
-3: Heure de début;;;;
-4: Heure de fin;;;;
-5: Localisation;;;;
-6: Nationalités / Équipes;;;;
-;;;;
-#######;;;;
-Simple Homme;27/07/24;08:30;12:00;Arena Porte de La Chapelle
-Simple Homme;27/07/24;14:00;17:30;Arena Porte de La Chapelle
-Simple Homme;27/07/24;19:30;23:00;Arena Porte de La Chapelle
-Simple Homme;28/07/24;08:30;12:00;Arena Porte de La Chapelle
-Simple Homme;28/07/24;14:00;17:30;Arena Porte de La Chapelle
-Simple Homme;28/07/24;19:30;23:00;Arena Porte de La Chapelle
-Simple Homme;29/07/24;08:30;12:00;Arena Porte de La Chapelle
-Simple Homme;29/07/24;14:00;17:30;Arena Porte de La Chapelle
-Simple Homme;29/07/24;19:30;23:00;Arena Porte de La Chapelle
-Simple Homme;30/07/24;08:30;12:00;Arena Porte de La Chapelle
-Simple Homme;30/07/24;14:00;17:30;Arena Porte de La Chapelle
-Simple Homme;30/07/24;19:30;23:00;Arena Porte de La Chapelle
-Simple Homme;31/07/24;08:30;12:00;Arena Porte de La Chapelle
-Simple Homme;31/07/24;14:00;17:30;Arena Porte de La Chapelle
-Simple Homme;31/07/24;16:00;21:00;Arena Porte de La Chapelle
-1/8 de finale;01/08/24;08:30;11:00;Arena Porte de La Chapelle
-1/8 de finale;01/08/24;13:00;16:30;Arena Porte de La Chapelle
-1/4 de finale;02/08/24;15:00;22:30;Arena Porte de La Chapelle
-1/2 de finale;04/08/24;08:30;13:00;Arena Porte de La Chapelle
-Finale Bronze;05/08/24;14:30;17:30;Arena Porte de La Chapelle
-Finale Or;05/08/24;14:30;17:30;Arena Porte de La Chapelle
+﻿Homme_Badminton_Simple;;;;;;;;Colonnes :;;;;1: Type;;;;2: Date;;;;3: Heure de début;;;;4: Heure de fin;;;;5: Localisation;;;;6: Nationalités / Équipes;;;;;;;;#######;;;;Poules préliminaires;27/07/24;08:30;12:00;Arena Porte de La ChapelleFinale;27/07/24;14:00;17:30;Arena Porte de La ChapelleDemi finale;27/07/24;19:30;23:00;Arena Porte de La ChapelleQuart de finale;28/07/24;08:30;12:00;Arena Porte de La ChapelleDemi finale;28/07/24;11:00;17:30;Arena Porte de La ChapelleQuart de finale;28/07/24;19:30;23:00;Arena Porte de La ChapelleFinale;29/07/24;08:30;12:00;Arena Porte de La ChapelleDemi finale;29/07/24;14:00;17:30;Arena Porte de La ChapelleQuart de finale;29/07/24;19:30;23:00;Arena Porte de La ChapelleDemi finale;30/07/24;08:30;12:00;Arena Porte de La ChapellePoules préliminaires;30/07/24;14:00;17:30;Arena Porte de La ChapellePoules préliminaires;30/07/24;19:30;23:00;Arena Porte de La ChapellePoules préliminaires;31/07/24;08:30;12:00;Arena Porte de La ChapellePoules préliminaires;31/07/24;14:00;17:30;Arena Porte de La ChapellePoules préliminaires;31/07/24;16:00;21:00;Arena Porte de La Chapelle1/8 de finale;01/08/24;08:30;11:00;Arena Porte de La Chapelle1/8 de finale;01/08/24;13:00;16:30;Arena Porte de La Chapelle1/4 de finale;02/08/24;15:00;22:30;Arena Porte de La Chapelle1/2 de finale;04/08/24;08:30;13:00;Arena Porte de La ChapelleFinale Bronze;05/08/24;14:30;17:30;Arena Porte de La ChapelleFinale Or;05/08/24;14:30;17:30;Arena Porte de La Chapelle
