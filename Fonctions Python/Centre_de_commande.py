@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import copy
 from Fonctions_de_création import creation_donnees, lire_donnee
-from Fonctions_attributions_points import n_p_ajout_point_globale # Cet appel à la fonction cause l'erreur
-from Fonctions_utiles import add_info, is_in
+#from Fonctions_attributions_points import n_p_ajout_point_globale # Cet appel à la fonction cause l'erreur
+from Fonctions_utiles import add_info, is_in, distanceAB
 from Base_de_données import *
 from Fonctions_de_tri import *
 
@@ -20,7 +20,7 @@ dossier_racine = r"/Users/lg/Library/CloudStorage/OneDrive-Personnel/Prépa/Spé
 ##################################
 
 # Voici ici les fonctions qui sont dans d'autres fichiers mais qu'on ne peux pas appeler
-'''
+
 def n_p_ajout_point_globale(liste, n):
     l_rep = liste
     for i in range(len(liste)):
@@ -36,28 +36,79 @@ def attribuer_points(tab,val):
     return tab
 
 
-print()
-print()
-print()
-
-
-
 def pts_pour_type(t):
-    if(t[0]=="Finale"):
+    if(t[indice_type]=="Finale"):
         attribuer_points(t,points_finale)
-    if(t[0]=='Demi finale'):
+    if(t[indice_type]=='Demi finale'):
         attribuer_points(t,points_demi)
-    if(t[0]=='Quart de finale'):
+    if(t[indice_type]=='Quart de finale'):
         attribuer_points(t,points_quart)
     return t
 
 def pts_pour_nationalité (nationalité,t):
-    sport=sports[t[0][0]]
+    sport=sports[t[0]]
     if is_in(nationalité,sport) :
         attribuer_points(t,points_nationalité)
     return t
 
-'''
+def pts_pour_distance(type_de_deplacement,t1,t2):
+    latA=t1[7][0]
+    longA=t1[7][1]
+    latB=t2[7][0]
+    longB=t2[7][1]
+    distance = distanceAB(latA,longA,latB,longB)
+    if(type_de_deplacement=="peu de déplacement"):
+        if(distance<2000):
+            attribuer_points(t1,2)
+            attribuer_points(t2,2)
+    if (type_de_deplacement=="déplacement modéré"):
+        if(distance<8000):
+            attribuer_points(t1,2)
+            attribuer_points(t2,2)
+    return t1,t2
+
+
+#######################
+# Nouvelles fonctions #
+#######################
+
+# On commence par attribuer les points en fonction du type de rencontre
+
+def fct_points_type_rencontres(tab): # Fonction qui attribue à chaque rencontre les points associés au type de rencontre
+    rep = []
+    for i in range (len(tab)): # Ici nous avons chaque sport et on travaille sur les rencontres
+        for j in range (len(tab[i])):
+            rep.append(pts_pour_type(tab[i][j]))
+    return rep
+
+def fct_points_nationalite(tab): # Fonction qui attribue les points à chaque rencontre en fonction de la nationalité
+    rep = []
+    for i in range (len(tab)): # Ici nous avons chaque sport et on travaille sur les rencontres
+            rep.append(pts_pour_nationalité("Chine",tab[i]))
+    return rep
+
+"""
+test = fct_points_type_rencontres(l_sports_av_points_0)
+
+print(test)
+
+test_2 = fct_points_nationalite(test)
+
+
+print()
+print()
+print()
+
+print(test_2)
+
+
+print()
+print()
+print()
+
+"""
+
+
 
 ###################################
 # Structure des données utilisées #
@@ -76,12 +127,43 @@ modele=[[[],[],[],[],[]]]   #| Indice 0 : Nom du sport
                             #| Indice 8 : Poids
                             #| Indice 9 : Type de rencontre (Si nécessaire)
 
+
+
+##############################
+# Base de données temporaire #
+##############################
+
+liste_evn     = [[["badminton" , "27/07/2024" , "08:30"	, "12:00" , "Arena Porte de La Chapelle" , "Poules préliminaires"] , 
+                  ["badminton" , "27/07/2024" , "14:30"	, "17:00" , "Arena Porte de La Chapelle" , "Finale"] , 
+                  ["badminton" , "27/07/2024" , "19:30"	, "21:00" , "Arena Porte de La Chapelle" , "Demi finale"] , 
+                  ["badminton" , "28/07/2024" , "08:30"	, "12:00" , "Arena Porte de La Chapelle" , "Demi finale"] , 
+                  ["badminton" , "28/07/2024" , "14:30"	, "17:00" , "Arena Porte de La Chapelle" , "Quart de finale"] , 
+                  ["badminton" , "28/07/2024" , "19:30"	, "21:00" , "Arena Porte de La Chapelle" , "Finale"] ,
+                  ["badminton" , "29/07/2024" , "08:30"	, "12:00" , "Arena Porte de La Chapelle" , "Poules préliminaires"] , 
+                  ["badminton" , "29/07/2024" , "14:30"	, "17:00" , "Arena Porte de La Chapelle" , "Finale"] , 
+                  ["badminton" , "29/07/2024" , "19:30"	, "21:00" , "Arena Porte de La Chapelle" , "Demi finale"] , 
+                  ["badminton" , "30/07/2024" , "08:30"	, "12:00" , "Arena Porte de La Chapelle" , "Demi finale"] , 
+                  ["badminton" , "30/07/2024" , "14:30"	, "17:00" , "Arena Porte de La Chapelle" , "Quart de finale"] , 
+                  ["badminton" , "30/07/2024" , "19:30"	, "21:00" , "Arena Porte de La Chapelle" , "Finale"]
+                    ] ,
+                 [
+                  ["football" , "27/07/2024" , "08:30"	, "12:00" , "Arena Porte de La Chapelle" , "Poules préliminaires"] , 
+                  ["football" , "27/07/2024" , "14:30"	, "17:00" , "Arena Porte de La Chapelle" , "Finale"] , 
+                  ["football" , "27/07/2024" , "19:30"	, "21:00" , "Arena Porte de La Chapelle" , "Demi finale"] , 
+                  ["football" , "28/07/2024" , "08:30"	, "12:00" , "Arena Porte de La Chapelle" , "Demi finale"] , 
+                  ["football" , "28/07/2024" , "14:30"	, "17:00" , "Arena Porte de La Chapelle" , "Quart de finale"] , 
+                  ["football" , "28/07/2024" , "19:30"	, "21:00" , "Arena Porte de La Chapelle" , "Finale"]
+
+                    
+                 ]]
+
 ################################
 # Informations sur les indices #
 ################################
 
 indice_date_rencontre = 1
-indice_points = 5
+indice_points = 6
+indice_type = 5
 
 ##############################
 # Informations sur les dates #
@@ -98,7 +180,7 @@ jours_ajouts = 1
 
 points_dates_strictes = 1
 points_dates_larges = 0
-points_nationalité = 5
+points_nationalité = 2
 points_finale = 5
 points_demi = 3
 points_quart = 1 
@@ -125,26 +207,78 @@ tableau_final = 1
 
 # On créé notre tableau avec tous les sports auxquels l'utilisateur peut assister 
 
-l_sports = creation_donnees()
-l_sports_av_points = add_info(l_sports)
-l_sports_av_points_0 = n_p_ajout_point_globale(l_sports_av_points,0) # On applique la fonction qui se trouve dans un autre fichier
+l_sports = liste_evn # On créé la liste de toutes les rencontres auxquelles ont peut assister
+l_sports_av_points = add_info(l_sports) # On ajoute la possibilité d'attribuer des points
 
-#for sport in l_sports_av_points_0:
-#   print(sport)
-
-print()
-print()
-print()
-
-tab_points_type_1 = []
+def creation_simu (l_sports_av_points_0):
+    l_sports_av_points_0 = n_p_ajout_point_globale(l_sports_av_points,0) # On met tous les points à 0.
+    l_sports_av_points_type = fct_points_type_rencontres(l_sports_av_points_0)
+    l_sports_av_points_pays = fct_points_nationalite(l_sports_av_points_type)
+    return l_sports_av_points_pays
 
 
 
+##################################################################################
+# Création de la fonction qui fait varier les points et qui sotcke les résultats #
+##################################################################################
+
+tab_simu_1 = []
+liste = l_sports_av_points
+for i in range (0,5):  # Dans la première boucle on fait varier les points pour la naitonalité de l'utilisateur 
+    points_nationalité = i
+    
+    for j in range (0,2): # Dans les deux prochaines boucles on fait varier les points pour les dates
+
+        for k in range(j , j + 3) : # Ici les dates strictes
+            
+            points_dates_larges = j
+            points_dates_strictes = k
+            
+            for l in range (0,3) : # Dans les 3 boucles suivantes on fait varier les points associés au type de rencontre
+
+                for m in range (l, l+2):
+
+                    for n in range (m, m+3): 
+
+                        points_quart = l 
+                        points_demi = m
+                        points_finale = n
+
+                    tab_simu_1.append(creation_simu(liste))
+                    
+                    
+                    
+                    """print()
+                    print('i : ',i)
+                    print('j : ',j)
+                    print('k : ',k)
+                    print('l : ',l)
+                    print('m : ',m)
+                    print('n : ',n)"""
+                    
+
+print(tab_simu_1)
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
 
 ######################
 # Zone de recherches #
@@ -152,54 +286,15 @@ tab_points_type_1 = []
 
 
 
-
-
-
-
-
-# On commence par attribuer les points en fonction du type de rencontre
-'''
-def fct_points_type_rencontres(tab):
-    rep = []
-    for i in range (len(tab)): # Ici nous avons chaque sport et on travaille sur les rencontres
-        for j in range (len(tab[i])):
-            rep.append(pts_pour_type(tab[i][j]))
-    return rep
-
-def fct_points_nationalite(tab):
-    rep = []
-    for i in range (len(tab)): # Ici nous avons chaque sport et on travaille sur les rencontres
-        for j in range (len(tab[i])):
-            rep.append(pts_pour_nationalité("France",tab[i][j]))
-    return rep
-
-
-test = fct_points_type_rencontres(l_sports_av_points_0)
-
-print(test)
-
-test_2 = fct_points_nationalite(test)
-'''
-print()
-print()
-print()
-
-#print(test_2)
-
-
-print()
-print()
-print()
-
 #print(tab_points_type_1)
 
-'''
+
 # Désormais nous avons accès à un tableau sur lequel nous pouvons travailler les points
 
 # On créé un tableau qui va contenir chacune de nos simulations
 # Les simulations 1 représentent l'application des fonctions date -> points -> dates
 
-simu_tab_1 = []
+#simu_tab_1 = []
 
 # Les simulations 2 représentent l'application des fonctions points -> dates
 
@@ -210,34 +305,46 @@ simu_tab_2 = []
 def tri_simu_1(liste) :
 
     rep = ejection_globale_n(liste)
-    rep = tri_tableau(rep)
+    rep = tri_tableau(rep,indice_points)
     rep = ejection_globale_n(rep)
 
     return rep
 
 def tri_simu_2(liste) :
 
-    rep = tri_tableau(liste)
+    rep = tri_tableau(liste,indice_points)
+
+
     rep = ejection_globale_n(rep)
 
     return rep
 
 
-for i in range (1,5):
-    for j in range (3,8):
-            for l in range (len(l_sports_av_points_0)):
-                points_nationalité = i
-                points_finale = j
-                points_demi = j - 1
-                points_quart = j - 3 
+print()
+print()
+print("Observons désormais la différence entre les différents tris que nous pouvons faire")
+print()
+print()
 
-                # On traite le premier cas, càd que l'on trie dans un premier temps les rencontres en fonction des dates, avant de trier les points
-                # On commence à attribuer les points pour le type de rencontre
+simu_tab_1 = tri_simu_1(l_sports_av_points_pays)
 
-                for a in range (len(l_sports_av_points_0[l])): # Ici nous avons chaque sport et on travaille sur les rencontres
-                    tab_points_type_1 = pts_pour_type(l_sports_av_points_0[l][a])'''
+for sport in simu_tab_1:
+    print(sport)
 
-'''
+print()
+print()
+print("Et désormais que ce passe-t-il lorsque nous changeons la manière de trier les données ?")
+print()
+print()
+
+
+simu_tab_2 = tri_simu_2(l_sports_av_points_pays)
+
+for sport in simu_tab_2:
+    print(sport)
+
+print()
+print() """
 
 
 
@@ -331,5 +438,5 @@ def imprimante():
 # Fonctions obsolètes #
 #######################
 
-'''
+
 

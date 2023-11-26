@@ -46,7 +46,8 @@ def ejection_globale(tableau):
     return tab_inter
 
 # Cette fonction permet de supprimer toutes les séances auxquels nous ne pouvons pas assister, en prenant le premier sport comme argument principal (Fonctionne pour n sports)
-    
+
+'''
 def ejection_globale_n(tableau):
     tab = copy.deepcopy(tableau) # Permet de copier le tableau en totalité, avec ses sous_tableaux et évite de modifier le tableau en entrée et ainsi la base de données
     for i in range(len(tab)):
@@ -71,6 +72,27 @@ def ejection_globale_n(tableau):
                         break  # Sortir de la boucle l après la suppression
     
     return tab
+
+'''
+
+
+def ejection_globale_n(tableau):
+    tab = copy.deepcopy(tableau)
+    i = 0
+    while i < len(tab):
+        sport_1 = tab[i]
+        j = i + 1
+        while j < len(tab):
+            sport_2 = tab[j]
+            if sport_1[1] == sport_2[1] and sport_1[3] > sport_2[2] and sport_1[2] <= sport_2[2]:
+                # Supprimer sport_2 du tableau principal
+                tab.pop(j)
+            else:
+                j += 1
+        i += 1
+    return tab
+
+
 
 
 

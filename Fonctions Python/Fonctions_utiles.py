@@ -89,9 +89,39 @@ def is_in(pays,sport):
 """is_in("Australie",tennis)"""
 
 
+def is_in2(nation,sport):
+    rep=False
+    if sport in sport:
+        for j in range(5):
+            if nation==sport[j]:
+                rep=True
+    return rep
 
 
+#################################
+# Fonctions évaluation distance #
+#################################
+
+###########################################################
+#fonction pour convertir un angle degré décimaux en radian#
+###########################################################
+
+import numpy as np
+def convert(d):
+    return d*np.pi/180
+
+##################################################################
+#fonction qui calcule la distance entre 2 lieux (à vol d'oiseaux)#
+##################################################################
+
+def distanceAB(latA,longA,latB,longB):
+    latA = convert(latA)
+    longA = convert(longA)
+    latB = convert(latB)
+    longB = convert(longB)
+    RT = 6378137          # rayon de la Terre
+    angle = np.acos(np.sin(latA)*np.sin(latB) + np.cos(latA)*np.cos(latB)*np.cos(abs(longB-longA)))
+    return angle*RT  #en mètre
 
 
-
-
+ 

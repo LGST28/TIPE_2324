@@ -4,7 +4,7 @@
 
 from Fonctions_de_création import transformation_date_locale
 from datetime import datetime, timedelta
-from Fonctions_utiles import transfo_dates_directe, add_info
+from Fonctions_utiles import transfo_dates_directe, add_info, is_in2
 from Centre_de_commande import indice_points, indice_date_rencontre, points_dates_larges, points_dates_strictes, dates_utilisateur, dates_larges, jours_ajouts, points_nationalité, points_finale, points_demi, points_quart
 
 
@@ -97,7 +97,7 @@ from Fonctions_utiles import is_in
 
 
 def pts_pour_nationalité (nationalité,t):
-    sport=sports[t[0][0]]
+    sport=sports.pays_prefs[t[0]]
     if is_in(nationalité,sport) :
         attribuer_points(t,points_nationalité)
     return t
@@ -106,3 +106,43 @@ def pts_pour_nationalité (nationalité,t):
 
 
 #print(rencontres)
+
+
+################################
+# Fonctions pour les distances #
+################################
+
+from Fonctions_utiles import distanceAB
+
+# l'utilisateur à le choix entre déplacement limité, déplacement modéré, déplacement illimité
+
+def pts_pour_distance(type_de_deplacement,t1,t2):
+    latA=t1[7][0]
+    longA=t1[7][1]
+    latB=t2[7][0]
+    longB=t2[7][1]
+    distance = distanceAB(latA,longA,latB,longB)
+    if(type_de_deplacement=="peu de déplacement"):
+        if(distance<2000):
+            attribuer_points(t1,2)
+            attribuer_points(t2,2)
+    if (type_de_deplacement=="déplacement modéré"):
+        if(distance<8000):
+            attribuer_points(t1,2)
+            attribuer_points(t2,2)
+    return t1,t2
+
+
+
+#############################################################
+# Fonction qui donne des points aux pays favoris par sports #
+#############################################################
+
+
+
+def pts_pour_favoris (t):
+    if (is_in2(t[3][0],t[0][0])==True) :
+        attribuer_points(t,5)
+    if (is_in2(t[4][0],t[0][0])==True) :
+        attribuer_points(t,5)
+    return t

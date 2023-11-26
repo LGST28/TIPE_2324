@@ -114,11 +114,11 @@ def creation_donnees ():
 
                         if (data[3][k]=="None" and j==k):
                             gen = generate_specific_rows(dossier_racine+r"Base de données TIPE/"+data[1][i]+"/"+data[2][j]+"/TIPE_"+data[1][i]+"_"+data[2][j]+".csv", userows=tab_indices)
-                            infos_matchs.append(transposee(np.loadtxt(gen, dtype = str, delimiter=";", usecols=(0,1,2,3,4), ndmin = 2, unpack='true', encoding="utf8")))   #va chercher dans le bon fichier   
+                            infos_matchs.append(transposee(np.loadtxt(gen, dtype = str, delimiter=";", usecols=(0,1,2,3,4,5), ndmin = 2, unpack='true', encoding="utf8")))   #va chercher dans le bon fichier   
                             infos_matchs = np.concatenate(infos_matchs)
                         else :
                             gen = generate_specific_rows(dossier_racine+r"Base de données TIPE/"+data[1][i]+"/"+data[2][j]+"/"+data[3][k]+"/TIPE_"+data[1][i]+"_"+data[2][j]+"_"+data[3][k]+".csv", userows=tab_indices)
-                            infos_matchs.append(transposee(np.loadtxt(gen, dtype = str, delimiter=";", usecols=(0,1,2,3,4), ndmin = 2, unpack='true', encoding="utf8")))  #va chercher dans le bon fichier 
+                            infos_matchs.append(transposee(np.loadtxt(gen, dtype = str, delimiter=";", usecols=(0,1,2,3,4,5), ndmin = 2, unpack='true', encoding="utf8")))  #va chercher dans le bon fichier 
                             infos_matchs = np.concatenate(infos_matchs)
                          
                         # Grâce aux indices, nous avons pu récupérer toutes les données des maths qui pourront être séléctionnés
@@ -126,7 +126,7 @@ def creation_donnees ():
                     
                         if len(infos_matchs) > 0:
                             infos_matchs = np.concatenate(infos_matchs)
-                            infos_matchs = np.reshape(infos_matchs, (-1, 5))  # Redimensionner le tableau à 2 dimensions (5 colonnes)
+                            infos_matchs = np.reshape(infos_matchs, (-1, 6))  # Redimensionner le tableau à 2 dimensions (5 colonnes)
                             Global.append(infos_matchs)  # Ajouter infos_matchs à Global sous forme de liste
                         
                         #print("Ceci est info_match")
