@@ -86,7 +86,7 @@ def is_in(pays,sport):
             rep=True
     return rep
 
-"""is_in("Australie",tennis)"""
+"""is_in("AUS",tennis)"""
 
 
 def is_in2(nation,sport):

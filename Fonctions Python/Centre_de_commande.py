@@ -84,7 +84,7 @@ def fct_points_type_rencontres(tab): # Fonction qui attribue à chaque rencontre
 def fct_points_nationalite(tab): # Fonction qui attribue les points à chaque rencontre en fonction de la nationalité
     rep = []
     for i in range (len(tab)): # Ici nous avons chaque sport et on travaille sur les rencontres
-            rep.append(pts_pour_nationalité("Chine",tab[i]))
+            rep.append(pts_pour_nationalité("CHN",tab[i]))
     return rep
 
 """
@@ -224,19 +224,19 @@ def creation_simu (l_sports_av_points_0):
 
 tab_simu_1 = []
 liste = l_sports_av_points
-for i in range (0,5):  # Dans la première boucle on fait varier les points pour la naitonalité de l'utilisateur 
+for i in range (0,1):  # Dans la première boucle on fait varier les points pour la naitonalité de l'utilisateur 
     points_nationalité = i
     
     for j in range (0,2): # Dans les deux prochaines boucles on fait varier les points pour les dates
 
-        for k in range(j , j + 3) : # Ici les dates strictes
+        for k in range(j , j + 2) : # Ici les dates strictes
             
             points_dates_larges = j
             points_dates_strictes = k
             
-            for l in range (0,3) : # Dans les 3 boucles suivantes on fait varier les points associés au type de rencontre
+            for l in range (0,1) : # Dans les 3 boucles suivantes on fait varier les points associés au type de rencontre
 
-                for m in range (l, l+2):
+                for m in range (l, l+1):
 
                     for n in range (m, m+3): 
 
@@ -248,20 +248,32 @@ for i in range (0,5):  # Dans la première boucle on fait varier les points pour
                     
                     
                     
-                    """print()
+                    print()
                     print('i : ',i)
                     print('j : ',j)
                     print('k : ',k)
                     print('l : ',l)
                     print('m : ',m)
-                    print('n : ',n)"""
+                    print('n : ',n)
                     
 
-print(tab_simu_1)
+for sport in tab_simu_1:
+    for rencontre in sport:
+        print(rencontre[6])
 
 
 
+t = tab_simu_1
+def moyenne_points(t):
+    tab_moy=[]
+    for i in range(len(t)):
+        moy=0
+        for j in range (len(t[i])):
+            moy+=t[i][j][6]
+        tab_moy.append(moy/len(t[i]))
+    return tab_moy
 
+print(moyenne_points(t))
 
 
 
